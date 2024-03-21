@@ -7,13 +7,15 @@ tramas = tramasService.separarTramas(text)
 
 print("En total hay", len(tramas), "tramas")
 
-tramasFiltradas = tramasService.contarTramasLongitudCorrecta(tramas)
+tramasConLongitudCorrecta, tramasConLongitudIncorrecta = tramasService.contarTramasLongitudCorrecta(tramas)
 
-print("En total hay", len(tramasFiltradas[0]), "tramas con correcta longitud")
+print(tramasConLongitudIncorrecta)
 
-tramasCorrectas = tramasService.contarTramasChecksumCorrecto(tramasFiltradas[0])[0]
+print("En total hay", len(tramasConLongitudCorrecta), "tramas con correcta longitud")
 
-print("En total hay", len(tramasCorrectas), "tramas con suma de verificación correcta y", (len(tramasFiltradas[0]) - len(tramasCorrectas)), "tramas con suma de verificación incorrecta.")
+tramasCorrectas = tramasService.contarTramasChecksumCorrecto(tramasConLongitudCorrecta)[0]
+
+print("En total hay", len(tramasCorrectas), "tramas con suma de verificación correcta y", (len(tramasConLongitudCorrecta) - len(tramasCorrectas)), "tramas con suma de verificación incorrecta.")
 
 print("Hay", tramasService.contarSecuenciasDeEscape(tramas), "tramas que utilizan secuencia de escape")
 
