@@ -1,8 +1,11 @@
 def separarTramas(text):
     tramas = []
-    trama = "7E"
-
-    for i in range(2, len(text), 2):
+    if(len(text) == 0):
+        return tramas
+    for i in range(0, len(text)-2, 2):
+        if(i == 0):
+            trama = "7E"
+            i = 2
         byte = text[i:i+2]
         if(byte != "7E"):
             trama = trama + byte
@@ -12,14 +15,14 @@ def separarTramas(text):
             else:
                 tramas.append(trama)
                 trama = "7E"
-
+    tramas.append(trama)
     return tramas
 
 def validarLongitudTrama(trama):
+    trama = filtrarSecuenciaEscape(trama)
     longitudOriginal = len(trama)/2 - 4
     longitud = int(trama[2:6], 16)
     return longitud != longitudOriginal
-
 
 
 def contarTramasLongitudCorrecta(tramas):
